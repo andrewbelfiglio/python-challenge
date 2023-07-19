@@ -48,4 +48,48 @@ print("--------------------")
 
 # Calculate and print results for each candidate
 for candidate in candidate_list:
-    print(f"{candidate}:")
+
+    # Print the candidate's name, with the percentage of total votes rounded to 3 decimals, followed by the vote count
+    print(f"{candidate}: {round((candidate_votes[candidate])/vote_total*100, 3)}% ({candidate_votes[candidate]} votes)")
+
+# Print divider
+print("--------------------")
+
+# Find and print the winner, max votes from the candidate_votes dictionary
+winner = max(candidate_votes, key = candidate_votes.get)
+print(f"Winner: {winner}")
+
+# Print divider
+print("--------------------")
+
+#---------------------------------------------------------------------------------
+# SEND RESULTS TABLE TO TEXT FILE
+#---------------------------------------------------------------------------------
+
+# Re-direct the output to a txt file
+# ~~~Re-direction code provided by luk32 (https://stackoverflow.com/users/1133179/luk32)
+# ~~~luk32 code found in stackoverflow: https://stackoverflow.com/questions/23364096/how-to-write-output-of-terminal-to-file
+import sys
+f = open(os.path.join("Analysis", "output.txt"), 'w')
+sys.stdout = f
+
+# Results table code is copied / pasted from previous
+# This will print the results again, but the output is being re-directed to a txt file
+print("Election Results")
+print("--------------------")
+print(f"Total Votes: {vote_total}")
+print("--------------------")
+
+for candidate in candidate_list:
+    print(f"{candidate}: {round((candidate_votes[candidate])/vote_total*100, 3)}% ({candidate_votes[candidate]} votes)")
+
+print("--------------------")
+
+winner = max(candidate_votes, key = candidate_votes.get)
+print(f"Winner: {winner}")
+
+print("--------------------")
+# End of copied results table code
+
+f.close()
+# End of re-directing the output
